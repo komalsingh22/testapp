@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:test_app/screens/search_screen.dart';
+import 'package:test_app/screens/favorites_screen.dart';
+import 'package:test_app/screens/weather_screen.dart';
 
 void main(){
-  runApp(const MyApp());
+  runApp(const ProviderScope(child: MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -9,7 +13,40 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Center(child: Text('Hello, World!'),),);
+    final colorScheme = ColorScheme.fromSeed(seedColor: Colors.blue);
+    return MaterialApp(
+      theme: ThemeData(colorScheme: colorScheme, useMaterial3: true),
+      darkTheme: ThemeData(colorScheme: ColorScheme.fromSeed(seedColor: Colors.blue, brightness: Brightness.dark), useMaterial3: true),
+      themeMode: ThemeMode.system,
+      home: const HomeShell(),
+    );
+  }
+}
+
+class HomeShell extends StatefulWidget {
+  const HomeShell({super.key});
+
+  @override
+  State<HomeShell> createState() => _HomeShellState();
+}
+
+class _HomeShellState extends State<HomeShell> {
+  int _index = 0;
+  final _pages = const [SearchScreen(), WeatherScreen(), FavoritesScreen()];
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: _pages[_index],
+      bottomNavigationBar: NavigationBar(
+        selectedIndex: _index,
+        onDestinationSelected: (i) => setState(() => _index = i),
+        destinations: const [
+          NavigationDestination(icon: Icon(Icons.search), label: 'Search'),
+          NavigationDestination(icon: Icon(Icons.cloud), label: 'Weather'),
+          NavigationDestination(icon: Icon(Icons.star), label: 'Favorites'),
+        ],
+      ),
+    );
   }
 }

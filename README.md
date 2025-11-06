@@ -1,17 +1,46 @@
-# test_app
+# Weather Forecast App (OpenWeatherMap)
 
-A new Flutter project.
+Clean-architecture Flutter app with:
+- City search with autocomplete
+- Current weather
+- 5-day forecast (min/max)
+- Favorites (local storage)
+- Error handling and loading states
 
-## Getting Started
+## 1) Setup
 
-This project is a starting point for a Flutter application.
+1. Install Flutter and set up devices.
+2. Get a free API key from OpenWeatherMap.
+3. Open `lib/services/constants.dart` and set `openWeatherApiKey`.
+4. Install dependencies:
 
-A few resources to get you started if this is your first Flutter project:
+```bash
+flutter pub get
+```
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## 2) Run
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-# testapp
+```bash
+flutter run
+```
+
+## 3) Project Structure
+
+- `lib/models/` — Plain models (`Weather`, `Forecast`, etc.)
+- `lib/services/` — `ApiService`, `AppConstants`
+- `lib/providers/` — Riverpod providers for API, selection, favorites, data
+- `lib/screens/` — `SearchScreen`, `WeatherScreen`
+
+## 4) Features
+
+- Search cities via OpenWeatherMap Geocoding API (autocomplete)
+- Current weather: temp, feels-like, humidity, wind, description
+- 5-day forecast: grouped by day with min/max and icon
+- Save favorite cities using `shared_preferences`
+- Robust errors and loading indicators
+
+## 5) Notes
+
+- Units are metric by default. Change in `AppConstants.units`.
+- If images don’t load on some platforms, ensure network permissions are enabled by Flutter defaults.
+
