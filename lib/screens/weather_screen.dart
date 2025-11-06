@@ -76,7 +76,7 @@ class _CurrentWeatherSection extends StatelessWidget {
           child: Card(
             key: ValueKey('${weather.cityName}-${weather.temperature}-${weather.icon}'),
             elevation: 4,
-            color: Colors.black.withOpacity(0.3),
+            color: Colors.black.withAlpha(77),
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
             child: Padding(
               padding: const EdgeInsets.all(16),
@@ -175,11 +175,11 @@ class _ForecastSection extends StatelessWidget {
                     width: 130,
                     padding: const EdgeInsets.all(12),
                     decoration: BoxDecoration(
-                      color: Colors.black.withOpacity(0.3),
+                      color: Colors.black.withAlpha(77),
                       borderRadius: BorderRadius.circular(14),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withOpacity(0.08),
+                          color: Colors.black.withAlpha(20),
                           blurRadius: 8,
                           offset: const Offset(0, 4),
                         ),
@@ -218,7 +218,7 @@ class _Chip extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Colors.white.withOpacity(0.2),
+        color: Colors.white.withAlpha(51),
         borderRadius: BorderRadius.circular(24),
       ),
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),

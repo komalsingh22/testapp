@@ -47,7 +47,7 @@ class FavoritesScreen extends ConsumerWidget {
                           final isLoading = snapshot.connectionState == ConnectionState.waiting;
                           final weather = snapshot.data;
                           return ListTile(
-                            tileColor: Colors.white.withOpacity(0.1),
+                            tileColor: Colors.white.withAlpha(26),
                             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
                             leading: isLoading
                                 ? const SizedBox(
@@ -64,7 +64,7 @@ class FavoritesScreen extends ConsumerWidget {
                             subtitle: weather != null
                                 ? Text(
                                     '${weather.temperature.toStringAsFixed(0)}° • ${weather.description}',
-                                    style: TextStyle(color: Colors.white.withOpacity(0.7)),
+                                    style: TextStyle(color: Colors.white.withAlpha(179)),
                                   )
                                 : null,
                             onTap: () {

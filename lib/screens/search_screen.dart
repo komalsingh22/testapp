@@ -5,6 +5,7 @@ import 'package:test_app/providers/weather_providers.dart';
 import 'package:test_app/screens/weather_screen.dart';
 import 'package:test_app/utils/flags.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:test_app/models/weather.dart';
 import 'package:test_app/widgets/background_widget.dart';
 
 class SearchScreen extends ConsumerStatefulWidget {
@@ -125,23 +126,44 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                         final loc = favorites[index];
                         return Container(
                           margin: const EdgeInsets.symmetric(vertical: 6),
-                          decoration: BoxDecoration(
-                            color: Colors.white.withOpacity(0.9),
-                            borderRadius: BorderRadius.circular(12),
-                          ),
-                          child: ListTile(
-                            leading: const Icon(Icons.star, color: Colors.amber),
-                            title: Text(loc.name),
-                            onTap: () {
-                              ref.read(selectedLocationProvider.notifier).select(loc);
-                              Navigator.of(context).push(
-                                MaterialPageRoute(builder: (_) => const BackgroundWidget(child: WeatherScreen())),
+                          child: FutureBuilder<Weather?>(
+                            future: api.fetchCurrentWeather(lat: loc.lat, lon: loc.lon),
+                            builder: (context, snapshot) {
+                              final isLoading = snapshot.connectionState == ConnectionState.waiting;
+                              final weather = snapshot.data;
+                              return ListTile(
+                                tileColor: Colors.black.withAlpha(77),
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                                leading: isLoading
+                                    ? const SizedBox(
+                                        width: 40,
+                                        height: 40,
+                                        child: CircularProgressIndicator(strokeWidth: 2, valueColor: AlwaysStoppedAnimation(Colors.white)),
+                                      )
+                                    : Image.network(
+                                        'https://openweathermap.org/img/wn/${weather?.icon ?? '01d'}.png',
+                                        width: 40,
+                                        height: 40,
+                                      ),
+                                title: Text(loc.name, style: const TextStyle(color: Colors.white)),
+                                subtitle: weather != null
+                                    ? Text(
+                                        '${weather.temperature.toStringAsFixed(0)}° • ${weather.description}',
+                                        style: TextStyle(color: Colors.white.withAlpha(179)),
+                                      )
+                                    : null,
+                                onTap: () {
+                                  ref.read(selectedLocationProvider.notifier).select(loc);
+                                  Navigator.of(context).push(
+                                    MaterialPageRoute(builder: (_) => const BackgroundWidget(child: WeatherScreen())),
+                                  );
+                                },
+                                 trailing: IconButton(
+                                  icon: const Icon(Icons.delete_outline, color: Colors.white),
+                                  onPressed: () => ref.read(favoritesProvider.notifier).remove(loc),
+                                ),
                               );
                             },
-                            trailing: IconButton(
-                              icon: const Icon(Icons.delete_outline),
-                              onPressed: () => ref.read(favoritesProvider.notifier).remove(loc),
-                            ),
                           ),
                         );
                       },
