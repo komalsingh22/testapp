@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:test_app/screens/search_screen.dart';
-import 'package:test_app/screens/favorites_screen.dart';
 import 'package:test_app/screens/weather_screen.dart';
 import 'package:test_app/widgets/background_widget.dart';
 
@@ -33,7 +32,7 @@ class HomeShell extends StatefulWidget {
 
 class _HomeShellState extends State<HomeShell> {
   int _index = 0;
-  final _pages = const [SearchScreen(), WeatherScreen(), FavoritesScreen()];
+  final _pages = const [SearchScreen(), WeatherScreen()];
 
   @override
   Widget build(BuildContext context) {
@@ -45,7 +44,6 @@ class _HomeShellState extends State<HomeShell> {
         destinations: const [
           NavigationDestination(icon: Icon(Icons.search), label: 'Search'),
           NavigationDestination(icon: Icon(Icons.cloud), label: 'Weather'),
-          NavigationDestination(icon: Icon(Icons.star), label: 'Favorites'),
         ],
       ),
     );
