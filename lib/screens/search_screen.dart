@@ -5,6 +5,7 @@ import 'package:test_app/providers/weather_providers.dart';
 import 'package:test_app/screens/weather_screen.dart';
 import 'package:test_app/utils/flags.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
+import 'package:test_app/widgets/background_widget.dart';
 
 class SearchScreen extends ConsumerStatefulWidget {
   const SearchScreen({super.key});
@@ -94,7 +95,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                 final loc = SelectedLocation(name: name, lat: lat, lon: lon);
                 ref.read(selectedLocationProvider.notifier).select(loc);
                 Navigator.of(context).push(
-                  MaterialPageRoute(builder: (_) => const WeatherScreen()),
+                  MaterialPageRoute(builder: (_) => const BackgroundWidget(child: WeatherScreen())),
                 );
               },
                   loadingBuilder: (context) => const Padding(
@@ -134,7 +135,7 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
                             onTap: () {
                               ref.read(selectedLocationProvider.notifier).select(loc);
                               Navigator.of(context).push(
-                                MaterialPageRoute(builder: (_) => const WeatherScreen()),
+                                MaterialPageRoute(builder: (_) => const BackgroundWidget(child: WeatherScreen())),
                               );
                             },
                             trailing: IconButton(

@@ -76,6 +76,7 @@ class _CurrentWeatherSection extends StatelessWidget {
           child: Card(
             key: ValueKey('${weather.cityName}-${weather.temperature}-${weather.icon}'),
             elevation: 4,
+            color: Colors.black.withOpacity(0.3),
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
             child: Padding(
               padding: const EdgeInsets.all(16),
@@ -93,17 +94,17 @@ class _CurrentWeatherSection extends StatelessWidget {
                       children: [
                         Row(
                           children: [
-                            Text('${weather.cityName} ', style: Theme.of(context).textTheme.titleMedium),
+                            Text('${weather.cityName} ', style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Colors.white)),
                             Text(countryCodeToEmoji(weather.countryCode), style: const TextStyle(fontSize: 18)),
                           ],
                         ),
                         Text(
                           '${weather.temperature.toStringAsFixed(0)}°',
-                          style: Theme.of(context).textTheme.displaySmall?.copyWith(fontWeight: FontWeight.w700),
+                          style: Theme.of(context).textTheme.displaySmall?.copyWith(fontWeight: FontWeight.w700, color: Colors.white),
                         ),
                         Text(
                           weather.description,
-                          style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Colors.black54),
+                          style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Colors.white70),
                         ),
                         const SizedBox(height: 8),
                         Wrap(
@@ -174,7 +175,7 @@ class _ForecastSection extends StatelessWidget {
                     width: 130,
                     padding: const EdgeInsets.all(12),
                     decoration: BoxDecoration(
-                      color: Theme.of(context).colorScheme.surface.withOpacity(0.95),
+                      color: Colors.black.withOpacity(0.3),
                       borderRadius: BorderRadius.circular(14),
                       boxShadow: [
                         BoxShadow(
@@ -187,7 +188,7 @@ class _ForecastSection extends StatelessWidget {
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Text(day, style: Theme.of(context).textTheme.titleMedium),
+                        Text(day, style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Colors.white)),
                         const SizedBox(height: 8),
                         Image.network(
                           'https://openweathermap.org/img/wn/$icon.png',
@@ -195,7 +196,7 @@ class _ForecastSection extends StatelessWidget {
                           height: 48,
                         ),
                         const SizedBox(height: 8),
-                        Text('${min.toStringAsFixed(0)}° / ${max.toStringAsFixed(0)}°'),
+                        Text('${min.toStringAsFixed(0)}° / ${max.toStringAsFixed(0)}°', style: const TextStyle(color: Colors.white)),
                       ],
                     ),
                   );
@@ -217,11 +218,11 @@ class _Chip extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        color: Theme.of(context).colorScheme.primaryContainer,
+        color: Colors.white.withOpacity(0.2),
         borderRadius: BorderRadius.circular(24),
       ),
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-      child: Text(label),
+      child: Text(label, style: const TextStyle(color: Colors.white)),
     );
   }
 }
