@@ -39,8 +39,17 @@ flutter run
 - Save favorite cities using `shared_preferences`
 - Robust errors and loading indicators
 
+
 ## 5) Notes
 
 - Units are metric by default. Change in `AppConstants.units`.
 - If images don’t load on some platforms, ensure network permissions are enabled by Flutter defaults.
+
+## 6)Images
+<img width="342" height="722" alt="Screenshot 2025-11-06 at 5 15 55 PM" src="https://github.com/user-attachments/assets/8cfaf3fe-dea1-45c8-a34c-24fa144dd990" />
+<img width="342" height="722" alt="Screenshot 2025-11-06 at 5 16 05 PM" src="https://github.com/user-attachments/assets/e760e861-1327-4e3e-90f6-6e225f27ee91" />
+
+
+
+
 
