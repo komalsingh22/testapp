@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:test_app/screens/search_screen.dart';
 import 'package:test_app/screens/favorites_screen.dart';
 import 'package:test_app/screens/weather_screen.dart';
+import 'package:test_app/widgets/background_widget.dart';
 
 void main(){
   runApp(const ProviderScope(child: MyApp()));
@@ -37,7 +38,7 @@ class _HomeShellState extends State<HomeShell> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: _pages[_index],
+      body: BackgroundWidget(child: _pages[_index]),
       bottomNavigationBar: NavigationBar(
         selectedIndex: _index,
         onDestinationSelected: (i) => setState(() => _index = i),

@@ -16,6 +16,7 @@ class WeatherScreen extends ConsumerWidget {
     final forecastAsync = ref.watch(fiveDayForecastProvider);
 
     return Scaffold(
+      backgroundColor: Colors.transparent,
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         title: Text(loc?.name ?? 'Weather'),
@@ -29,14 +30,7 @@ class WeatherScreen extends ConsumerWidget {
           ),
         ],
       ),
-      body: Container(
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('assets/images/1330873-clouds-weather.webp'),
-            fit: BoxFit.cover,
-          ),
-        ),
-        child: SafeArea(
+      body: SafeArea(
           child: RefreshIndicator(
             onRefresh: () async {
               ref.invalidate(currentWeatherProvider);
@@ -60,7 +54,6 @@ class WeatherScreen extends ConsumerWidget {
             ),
           ),
         ),
-      ),
     );
   }
 }

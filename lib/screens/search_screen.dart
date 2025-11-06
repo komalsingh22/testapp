@@ -22,20 +22,14 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
     final api = ref.read(apiServiceProvider);
 
     return Scaffold(
+      backgroundColor: Colors.transparent,
       extendBodyBehindAppBar: true,
       appBar: AppBar(
         title: const Text('Weather Finder'),
         backgroundColor: Colors.transparent,
         elevation: 0,
       ),
-      body: Container(
-        decoration: const BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage('assets/images/1330873-clouds-weather.webp'),
-            fit: BoxFit.cover,
-          ),
-        ),
-        child: SafeArea(
+      body: SafeArea(
           child: Padding(
             padding: const EdgeInsets.all(16),
             child: Column(
@@ -156,7 +150,6 @@ class _SearchScreenState extends ConsumerState<SearchScreen> {
             ),
           ),
         ),
-      ),
     );
   }
 }
